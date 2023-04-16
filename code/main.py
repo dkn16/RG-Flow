@@ -196,7 +196,7 @@ def main():
             optimizer.zero_grad()
 
             x = x.to(args.device)
-            x, ldj_logit = utils.logit_transform(x)
+            x, ldj_logit = utils.logit_transform(x,dequant=False)
             log_prob = flow.log_prob(x)
             loss = -(log_prob + ldj_logit) / (args.nchannels * args.L**2)
             loss_mean = loss.mean()

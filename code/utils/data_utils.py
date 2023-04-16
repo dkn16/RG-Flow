@@ -10,6 +10,7 @@ from torch.utils import data
 from torchvision import datasets, transforms
 
 from args import args
+from .dataset import MultiResolutionDataset
 
 
 class DataInfo():
@@ -129,7 +130,11 @@ def load_dataset():
                                transform=transform)
 
     else:
-        raise ValueError(f'Unknown data: {args.data}')
+        data_info = DataInfo(args.data, args.nchannels, args.L)
+        transform = transforms.ToTensor()
+        train_set = MultiResolutionDataset(args.data,transform,resolution = [args.L])
+        test_set = None
+        #raise ValueError(f'Unknown data: {args.data}')
 
     assert data_info.channel == args.nchannels
     assert data_info.size == args.L

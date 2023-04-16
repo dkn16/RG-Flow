@@ -11,7 +11,7 @@ group.add_argument(
     '--data',
     type=str,
     default='celeba32',
-    choices=['celeba32', 'mnist32', 'cifar10', 'chair600', 'msds1', 'msds2'],
+    #choices=['celeba32', 'mnist32', 'cifar10', 'chair600', 'msds1', 'msds2'],
     help='dataset name',
 )
 group.add_argument(
@@ -57,7 +57,7 @@ group.add_argument(
 group.add_argument(
     '--nlayers',
     type=str,
-    default='8,6,4,2',
+    default='10,8,6,4,2',
     help='number of subnet layers in an RG block',
 )
 group.add_argument(
