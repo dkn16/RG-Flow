@@ -1,0 +1,17 @@
+#PBS -N styleGAN
+#PBS -j oe
+#PBS -l select=1:ncpus=8:mem=20gb:ngpus=1
+
+cd /work/dkn16/RG-Flow/code
+source activate PyTorch-1.4.0
+#export OMP_NUM_THREADS=1
+#export PYTHONPATH=/home/dkn16/tf/lib/python3.8/site-packages/:/home/dkn16/.local/lib/python3.7/site-packages/:$PYTHONPATH
+#python prepare_tngdata.py --out /scratch/dkn16/camels/lmdb_tng  --size 64,64  /scratch/dkn16/camels/data
+CUDA_VISIBLE_DEVICES=4 python main.py --data /scratch/dkn16/camels/lmdb_tng --nchannels 1 --L 64 --cuda 4
+# python generate.py --sample 8 --pics 8 --ckpt ./checkpoint/100000.pt --size 64
+# python closed_form_factorization.py ./checkpoint/100000.pt
+#python apply_factor.py -i 1 -d 5 -n 10 --ckpt ./checkpoint/100000.pt ./factor.pt --size 64
+#python apply_factor.py -i 2 -d 5 -n 10 --ckpt ./checkpoint/100000.pt ./factor.pt --size 64
+#python apply_factor.py -i 3 -d 5 -n 10 --ckpt ./checkpoint/100000.pt ./factor.pt --size 64
+#python apply_factor.py -i 4 -d 5 -n 10 --ckpt ./checkpoint/100000.pt ./factor.pt --size 64
+
